@@ -1,0 +1,18 @@
+[Unit]
+Description=Waveshare UPS HAT C battery monitor
+After=multi-user.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/ups-monitor
+ExecStart=/usr/bin/python3 -u /opt/ups-monitor/ups_monitor.py --config /etc/ups-monitor.ini
+Restart=on-failure
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
